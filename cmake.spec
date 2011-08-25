@@ -9,7 +9,7 @@ Version:        %{version}
 Release:        %{release}%{?dist}
 Summary:        CMake 2.8.5
 
-Group:          
+Group:          Rocks
 License:        
 URL:            
 Source0:        %{name}-%{version}.tar.gz
