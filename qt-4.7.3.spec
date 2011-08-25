@@ -18,10 +18,12 @@ Group:			Rocks
 QT opensource for a Rocks Cluster (installed into the nfs share /share/apps).
 
 %prep
-%setup -q
+%setup -q -n qt-everywhere-opensource-src-%{version}
 
 %build
-./configure
+echo 'o
+yes
+' | ./configure
 make
 
 %install
