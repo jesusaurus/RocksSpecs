@@ -10,8 +10,8 @@ Release:        %{release}%{?dist}
 Summary:        CMake 2.8.5
 
 Group:          Rocks
-License:        
-URL:            
+License:        BSD
+URL:            http://www.cmake.org/
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -19,7 +19,7 @@ BuildRequires:
 Requires:       
 
 %description
-GNU CMake
+CMake http://www.cmake.org
 
 %prep
 %setup -q
