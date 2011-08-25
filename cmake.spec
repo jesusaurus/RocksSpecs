@@ -23,7 +23,13 @@ CMake http://www.cmake.org
 
 
 %build
-%configure
+if which cmake &> /dev/null
+then
+	cmake .
+else
+	./bootstrap
+fi
+ 
 make %{?_smp_mflags}
 
 
