@@ -23,13 +23,7 @@ CMake http://www.cmake.org
 
 
 %build
-if which cmake &> /dev/null
-then
-	cmake .
-else
-	./bootstrap
-fi
- 
+./bootstrap
 make %{?_smp_mflags}
 
 
@@ -44,6 +38,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
+
+   /usr/local/bin/ccmake
+   /usr/local/bin/cmake
+   /usr/local/bin/cpack
+   /usr/local/bin/ctest
+   /usr/local/doc/cmake-2.8/
+   /usr/local/man/man1/
+   /usr/local/share/cmake-2.8/
+
 %doc
 
 
