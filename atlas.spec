@@ -54,11 +54,11 @@ make library
 
 %install
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
-DESTDIR=$RPM_BUILD_ROOT make install
+DESTDIR=$RPM_BUILD_ROOT/share/apps make install
 cd ../../sparse/UMFPACK
-DESTDIR=$RPM_BUILD_ROOT make install
+DESTDIR=$RPM_BUILD_ROOT/share/apps make install
 cd ../AMD
-DESTDIR=$RPM_BUILD_ROOT make install
+DESTDIR=$RPM_BUILD_ROOT/share/apps make install
 
 
 %clean
