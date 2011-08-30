@@ -1,4 +1,4 @@
-%define name		qt
+%define name		qt4
 %define dist		rocks
 %define release		2
 %define version		4.7.3
