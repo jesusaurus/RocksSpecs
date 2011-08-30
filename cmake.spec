@@ -6,7 +6,7 @@
 
 Name:           %{name}
 Version:        %{version}
-Release:        %{?dist}%{release}
+Release:        %{dist}.%{release}
 Summary:        CMake 2.8.5
 
 Group:          Rocks
