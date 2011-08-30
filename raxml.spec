@@ -2,6 +2,7 @@
 %define dist	rocks
 %define release	1
 %define version git
+%define prefix	/share/apps
 
 Name:		%{name}
 Version:	%{version}
@@ -9,7 +10,7 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Prefix:		/share/apps
+Prefix:		%{prefix}
 BuildRequires:	git
 Summary:	RAxML standard & RAxML light
 
@@ -36,7 +37,9 @@ make -f Makefile.SSE3.HYBRID.gcc
 
 
 %install
-ls $RPM_BUILD_DIR
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
+cp $RPM_BUILD_DIR/%{name}-%{version}/RAxML-Light-1.0.5/raxmlLight-MPI $RPM_BUILD_ROOT/%{prefix}/bin/raxmlLight
+cp $RPM_BUILD_DIR/%{name}-%{version}/standard-RAxML/raxmlHPC-HYBRID-SSE3 $RPM_BUILD_ROOT/%{prefix}/bin/raxmlHPC
 
 %clean
 cd $RPM_BUILD_ROOT
@@ -44,3 +47,6 @@ rm -rf %{name}-%{version}
 
 
 %files
+/share/apps/bin/raxmlHPC
+/share/apps/bin/raxmlLight
+
