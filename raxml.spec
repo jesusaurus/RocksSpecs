@@ -27,6 +27,7 @@ git clone git://github.com/stamatak/standard-RAxML.git
 
 
 %build
+cd $RPM_BUILD_DIR/%{name}-%{version}
 cd RAxML-Light-1.0.5
 make -f Makefile.SSE3.MPI
 
