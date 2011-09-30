@@ -34,7 +34,7 @@ make
 rm -rf %{buildroot}/%{prefix}
 mkdir -p %{buildroot}/%{prefix}
 
-make INSTALL_ROOT=%{buildroot}/%{prefix} install
+make INSTALL_ROOT=%{buildroot} install
 
 %clean
 make clean
