@@ -1,6 +1,6 @@
 %define name	meep
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 1.1.1
 
 Name:		%{name}
@@ -17,11 +17,15 @@ Requires:	guile
 Requires:	hdf5 
 Requires:	harminv
 Requires:	libctl
+Requires:	fftw3
+Requires:	gsl
 BuildRequires:	atlas
 BuildRequires:	guile-devel
 BuildRequires:	hdf5-devel
 BuildRequires:	harminv
 BuildRequires:	libctl
+BuildRequires:	fftw3-devel
+BuildRequires:	gsl-devel
 Summary:	Meep 1.1.1 with Harminv 1.3.1 and libCtl 3.1
 
 %description
@@ -30,11 +34,12 @@ Meep for a Rocks Cluster.  Not intended for redistribution.
 %prep
 %setup
 %setup -n libctl-3.1 -T -b 1
+mv $RPM_BUILD_DIR/libctl-3.1 /share/apps/src
 
 
 %build
 cd ../meep-1.1.1
-F77=gfortran LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps
+F77=gfortran LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --with-libctl=/share/apps/src/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps
 make
 
 
