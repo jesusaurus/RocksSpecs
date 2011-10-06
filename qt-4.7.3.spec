@@ -2,7 +2,7 @@
 %define dist		rocks
 %define release		2
 %define version		4.7.3
-%define buildroot %{_tmppath}/%{name}-%{version}.%{release}-root
+%define buildroot %{_tmppath}/%{name}-%{version}.%{release}
 %define prefix		/usr/local
 
 
@@ -31,11 +31,13 @@ make
 
 
 %install
-rm -rf $RPM_BUILD_ROOT%{prefix}
-mkdir -p $RPM_BUILD_ROOT%{prefix}
+rm -rf %{buildroot}%{prefix}
+mkdir -p %{buildroot}%{prefix}
 
-make INSTALL_ROOT=$RPM_BUILD_ROOT install
+INSTALL_ROOT=%{buildroot} make install
 
+%clean
+make clean
 
 %files
 
