@@ -12,7 +12,7 @@ Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-Source:		http://www.netlib.org/scalapack/scalapack_installer.tgz
+Source:		siesta-3.0-rc2.tgz
 Requires:	scalapack
 BuildRequires:	scalapack
 Summary:	Siesta
