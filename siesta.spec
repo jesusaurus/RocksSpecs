@@ -1,9 +1,9 @@
 %define name	siesta
 %define dist	rocks
 %define release	1
-%define version 3.0-rc2
+%define version 3.0
 %define prefix	/share/apps
-%define inst	%{name}-%{version}
+%define inst	%{name}-%{version}-rc2
 
 Name:		%{name}
 Version:	%{version}
@@ -22,7 +22,7 @@ Siesta for a Rocks Cluster.  Not intended for redistribution.
 
 
 %prep
-%setup -q
+%setup -n %{inst} -q
 
 
 %build
