@@ -1,9 +1,9 @@
 %define name	scalapack
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 1.8.0
 %define prefix	/share/apps
-%define inst	%{name}_installer_0.96
+%define inst	%{name}-%{version}
 
 Name:		%{name}
 Version:	%{version}
@@ -12,38 +12,33 @@ Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-Source:		http://www.netlib.org/scalapack/scalapack_installer.tgz
+Source:		%{inst}.tgz
+Source1:	SLmake.rocks
 Requires:	atlas
+Requires:	blacs
 BuildRequires:	atlas
-BuildRequires:	python
-Summary:	ScaLAPACK and BLACS
+BuildRequires:	blacs
+Summary:	ScaLAPACK
 
 %description
-ScaLAPACK and BLACS for a Rocks Cluster.  Not intended for redistribution.
+ScaLAPACK for a Rocks Cluster.  Not intended for redistribution.
 
 
 %prep
-%setup -n %{inst} -q
+%setup -q
 
 
 %build
-cd $RPM_BUILD_DIR/%{inst}
-mkdir -p $RPM_BUILD_ROOT/share/apps
-./setup.py --prefix=$RPM_BUILD_ROOT/share/apps --blaslib=/share/apps/lib/libblas.a --lapacklib=/share/apps/lib/liblapack.a  
-
+cp $RPM_SOURCE_DIR/SLmake.rocks $RPM_BUILD_DIR/%{inst}/SLmake.inc
+sed -i "22 s!home!home = $RPM_BUILD_DIR/%{inst}!" $RPM_BUILD_DIR/%{inst}/SLmake.inc #inline patches, eww :(
+make
 
 %install
-mkdir -p %{prefix}
-cp -R $RPM_BUILD_ROOT%{prefix}/* %{prefix}/
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/lib
+cp $RPM_BUILD_DIR/%{inst}/libscalapack.a $RPM_BUILD_ROOT/%{prefix}/lib/
+
 
 %clean
 
 
 %files
-   /share/apps/lib/blacs.a
-   /share/apps/lib/blacsC.a
-   /share/apps/lib/blacsF77.a
-   /share/apps/lib/libscalapack.a
-   /share/apps/log/blacslog
-   /share/apps/log/scalog
-
