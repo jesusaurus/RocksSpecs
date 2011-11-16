@@ -14,6 +14,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Source0:	mpiblacs.tgz
 Source1:	mpiblacs-patch03.tgz
+Source2:	Bmake.rocks
 Requires:	atlas
 BuildRequires:	atlas
 Summary:	BLACS
@@ -24,28 +25,29 @@ BLACS for a Rocks Cluster.  Not intended for redistribution.
 
 %prep
 %setup -n %{inst} -q
-%setup -T -b 1
-exit
+%setup -T -D -b 1 -n %{inst}
 
 
 %build
 cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT/share/apps
-./setup.py --prefix=$RPM_BUILD_ROOT/share/apps --blaslib=/share/apps/lib/libblas.a --lapacklib=/share/apps/lib/liblapack.a  
+cp $RPM_SOURCE_DIR/Bmake.rocks $RPM_BUILD_DIR/%{inst}/Bmake.inc
 
+echo "
+BTOPdir = $RPM_BUILD_DIR/%{inst}
+" >> $RPM_BUILD_DIR/%{inst}/Bmake.inc
+
+make mpi
 
 %install
-mkdir -p %{prefix}
-cp -R $RPM_BUILD_ROOT%{prefix}/* %{prefix}/
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/lib
+cp -R $RPM_BUILD_DIR/%{inst}/LIB/*MPI.a $RPM_BUILD_ROOT/%{prefix}/lib/
 
 %clean
 
 
 %files
-   /share/apps/lib/blacs.a
-   /share/apps/lib/blacsC.a
-   /share/apps/lib/blacsF77.a
-   /share/apps/lib/libscalapack.a
-   /share/apps/log/blacslog
-   /share/apps/log/scalog
+   /share/apps/lib/blacs_MPI.a
+   /share/apps/lib/blacsCinit_MPI.a
+   /share/apps/lib/blacsF77init_MPI.a
 
