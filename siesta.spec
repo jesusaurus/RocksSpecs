@@ -1,6 +1,6 @@
 %define name	siesta
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 3.0
 %define prefix	/share/apps
 %define inst	%{name}-%{version}-rc2
