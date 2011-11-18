@@ -30,7 +30,7 @@ Quantum Espresso with WanT plugin for a Rocks Cluster.  Not intended for redistr
 cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT%{prefix}
 ./configure --enable-parallel CC=mpicc LIBDIRS="/share/apps/lib /opt/openmpi/lib" FFLAGS="-I/opt/openmpi/include" CFLAGS="-I/opt/openmpi/include"
-make want
+make pwall want
 
 
 %install
