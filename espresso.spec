@@ -1,8 +1,8 @@
 %define name		quantum-espresso
 %define dist		rocks
-%define release		1
+%define release		2
 %define version		4.3
-%define wversion	2.1.1
+%define wversion	2.3.0
 %define prefix		/share/apps
 %define inst		espresso-%{version}
 
@@ -29,7 +29,7 @@ Quantum Espresso with WanT plugin for a Rocks Cluster.  Not intended for redistr
 %build
 cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT%{prefix}
-./configure --enable-parallel CC=mpicc LIBDIRS="/share/apps/lib /opt/openmpi/lib" FFLAGS="-I/opt/openmpi/include" CFLAGS="-I/opt/openmpi/include"
+./configure --enable-parallel CC=mpicc FC=mpif90 LIBDIRS="/share/apps/lib /opt/openmpi/lib" FFLAGS="-I/opt/openmpi/include" CFLAGS="-I/opt/openmpi/include"
 make pwall want
 
 
