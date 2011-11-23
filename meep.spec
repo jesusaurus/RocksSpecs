@@ -1,6 +1,6 @@
 %define name	meep
 %define dist	rocks
-%define release	2
+%define release	3
 %define version 1.1.1
 
 Name:		%{name}
@@ -34,12 +34,11 @@ Meep for a Rocks Cluster.  Not intended for redistribution.
 %prep
 %setup
 %setup -n libctl-3.1 -T -b 1
-mv $RPM_BUILD_DIR/libctl-3.1 /share/apps/src
 
 
 %build
 cd ../meep-1.1.1
-F77=gfortran LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --with-libctl=/share/apps/src/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps
+F77=mpif77 CC=mpicc LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps
 make
 
 
