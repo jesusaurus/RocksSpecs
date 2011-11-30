@@ -1,6 +1,6 @@
 %define name    h5utils
 %define dist    rocks
-%define release 1
+%define release 2
 %define version 1.12.1
 
 Name:           %{name}
@@ -13,7 +13,7 @@ Source0:        h5utils-1.12.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:         /share/apps
 Requires:       hdf5
-BuildRequires:  hdf5-devel
+BuildRequires:  hdf5
 Summary:        Tools for HDF5
 
 %description
@@ -25,10 +25,7 @@ For a Rocks Cluster.  Not intended for redistribution.
 
 %build
 cd $RPM_BUILD_DIR/%{name}-%{version}
-export F77=gfortran
-export LDFLAGS="-L/share/apps/lib $LDFLAGS"
-export CPPFLAGS="-I/share/apps/include $CPPFLAGS"
-./configure --without-octave --prefix=/share/apps
+F77=mpif77 CC=mpicc LDFLAGS="-L/share/apps/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include $CPPFLAGS" ./configure --without-octave --prefix=/share/apps
 make
 
 
