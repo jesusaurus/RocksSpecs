@@ -23,7 +23,7 @@ Parallel HDF5 with Fortran support for a Rocks Cluster.  Not intended for redist
 
 %build
 cd $RPM_BUILD_DIR/%{name}-%{version}
-CC=mpicc LDFLAGS="-L/share/apps/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include $CPPFLAGS" ./configure --prefix=/share/apps --enable-parallel --enable-fortran"
+CC=mpicc LDFLAGS="-L/share/apps/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include $CPPFLAGS" ./configure --prefix=/share/apps --enable-parallel --enable-fortran
 make
 
 
