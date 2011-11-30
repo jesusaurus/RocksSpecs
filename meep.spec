@@ -21,7 +21,7 @@ Requires:	fftw3
 Requires:	gsl
 BuildRequires:	atlas
 BuildRequires:	guile-devel
-BuildRequires:	hdf5-devel
+BuildRequires:	hdf5
 BuildRequires:	harminv
 BuildRequires:	libctl
 BuildRequires:	fftw3-devel

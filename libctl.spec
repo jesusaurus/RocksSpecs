@@ -17,7 +17,7 @@ Requires:	hdf5
 Requires:	harminv
 BuildRequires:	atlas
 BuildRequires:	guile-devel
-BuildRequires:	hdf5-devel
+BuildRequires:	hdf5
 BuildRequires:	harminv
 Summary:	libCtl 3.1
 
@@ -30,7 +30,7 @@ libCtl for a Rocks Cluster.  Not intended for redistribution.
 
 %build
 cd ../%{name}-%{version}
-F77=gfortran LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --prefix=/share/apps 
+F77=mpif77 LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --prefix=/share/apps 
 make
 
 
