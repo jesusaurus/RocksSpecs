@@ -38,7 +38,7 @@ Meep for a Rocks Cluster.  Not intended for redistribution.
 
 %build
 cd ../meep-1.1.1
-F77=mpif77 CC=mpicc LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps
+F77=mpif77 CC=mpicc LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps --with-hdf5=/share/apps/lib
 make
 
 
