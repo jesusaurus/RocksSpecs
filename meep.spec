@@ -1,6 +1,6 @@
 %define name	meep
 %define dist	rocks
-%define release	3
+%define release	4
 %define version 1.1.1
 
 Name:		%{name}
@@ -38,14 +38,14 @@ Meep for a Rocks Cluster.  Not intended for redistribution.
 
 %build
 cd ../meep-1.1.1
-F77=mpif77 CC=mpicc CXX=mpiCC LDFLAGS="-L/share/apps/lib -L/opt/openmpi/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include -I/opt/openmpi/include -DH5_USE_16_API=1 $CPPFLAGS" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi=/opt/openmpi/lib --prefix=/share/apps
+F77=mpif77 CC=mpicc CXX=mpiCC MPICXX=mpiCC MPILIBS="-lmpi" LDFLAGS="-L/share/apps/lib -L/opt/openmpi/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include -I/opt/openmpi/include -DH5_USE_16_API=1 $CPPFLAGS" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi --prefix=/share/apps
 make
 
 
 %install
 cd $RPM_BUILD_DIR/%{name}-%{version}
 rm -rf $RPM_BUILD_ROOT/
-mkdir -p $RPM_BUILD_ROOT/
+mkdir -p $RPM_BUILD_ROOT/share/apps
 DESTDIR=$RPM_BUILD_ROOT make install
 
 
@@ -54,13 +54,13 @@ cd $RPM_BUILD_DIR
 rm -rf %{name}-%{version}
 
 %files
-/share/apps/bin/meep
+/share/apps/bin/meep-mpi
 /share/apps/include/meep.hpp
 /share/apps/include/meep/mympi.hpp
 /share/apps/include/meep/vec.hpp
-/share/apps/lib/libmeep.a
-/share/apps/lib/libmeep.la
-/share/apps/lib/pkgconfig/meep.pc
+/share/apps/lib/libmeep_mpi.a
+/share/apps/lib/libmeep_mpi.la
+/share/apps/lib/pkgconfig/meep_mpi.pc
 /share/apps/share/meep/casimir.scm
 /share/apps/share/meep/meep-enums.scm
 /share/apps/share/meep/meep.scm
