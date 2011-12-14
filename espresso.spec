@@ -15,6 +15,8 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Source0:	espresso-%{version}.tar.gz
 Source1:	want-%{wversion}.tar.gz
+BuildRequires:	gcc44
+BuildRequires:	gcc44-gfortran
 Summary:	Quantum Espresso with WanT
 
 %description
@@ -29,9 +31,15 @@ Quantum Espresso with WanT plugin for a Rocks Cluster.  Not intended for redistr
 %build
 cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT%{prefix}
-./configure --enable-parallel CC=mpicc FC=mpif90 LIBDIRS="/share/apps/lib /opt/openmpi/lib" FFLAGS="-I/opt/openmpi/include" CFLAGS="-I/opt/openmpi/include"
-make pwall want
-
+export GFORTRAN_UNBUFFERED_ALL=1
+export OMPI_CC=gcc44 
+export OMPI_FC=gfortran44 
+export OMPI_F77=gfortran44 
+CC=mpicc FC=mpif90 F90=gfortran44 ./configure --enable-parallel LIBDIRS="/share/apps/lib /opt/openmpi/lib" FFLAGS="-I/opt/openmpi/include" CFLAGS="-I/opt/openmpi/include" && make pwall want
+unset GFORTRAN_UNBUFFERD_ALL
+unset OMPI_CC
+unset OMPI_FC
+unset OMPI_F77
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
@@ -97,4 +105,6 @@ cp WANT/bin/* $RPM_BUILD_ROOT/%{prefix}/bin/
    /share/apps/bin/wannier_ham.x
    /share/apps/bin/wannier_plot.x
    /share/apps/bin/wfdd.x
+   /share/apps/bin/wfk2etsf.x
+
 
