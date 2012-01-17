@@ -32,7 +32,7 @@ make blaslib lapacklib tmglib
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/lib/
-cp libblas.so liblapack.so libtmglib.so $RPM_BUILD_ROOT/%{prefix}/lib/
+cp librefblas.so liblapack.so libtmglib.so $RPM_BUILD_ROOT/%{prefix}/lib/
 
 
 %clean
@@ -41,3 +41,7 @@ rm -rf %{name}-%{version}
 
 
 %files
+   /share/apps/lib/liblapack.so
+   /share/apps/lib/librefblas.so
+   /share/apps/lib/libtmglib.so
+
