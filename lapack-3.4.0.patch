@@ -1,0 +1,64 @@
+diff -ru BLAS/SRC/Makefile BLAS/SRC/Makefile
+--- BLAS/SRC/Makefile	2008-11-07 09:35:57.000000000 -0800
++++ BLAS/SRC/Makefile	2012-01-13 11:59:00.000000000 -0800
+@@ -138,8 +138,7 @@
+ 	$(ZBLAS2) $(ZBLAS3) $(ALLBLAS)
+ 
+ $(BLASLIB): $(ALLOBJ)
+-	$(ARCH) $(ARCHFLAGS) $@ $(ALLOBJ)
+-	$(RANLIB) $@
++	$(LOADER) $(LOADOPTS) -z muldefs -shared -Wl,-soname,librefblas.so -o $@ $(ALLOBJ)
+ 
+ single: $(SBLAS1) $(ALLBLAS) $(SBLAS2) $(SBLAS3)
+ 	$(ARCH) $(ARCHFLAGS) $(BLASLIB) $(SBLAS1) $(ALLBLAS) \
+diff -ru make.inc make.inc
+--- make.inc	2012-01-13 12:08:53.000000000 -0800
++++ make.inc	2012-01-13 11:51:19.000000000 -0800
+@@ -13,9 +13,9 @@
+ #  desired load options for your machine.
+ #
+ FORTRAN  = gfortran 
+-OPTS     = -O2
++OPTS     = -O2 -fPIC -m64
+ DRVOPTS  = $(OPTS)
+-NOOPT    = -O0
++NOOPT    = -O0 -fPIC -m64
+ LOADER   = gfortran
+ LOADOPTS =
+ #
+@@ -53,6 +53,6 @@
+ #  machine-specific, optimized BLAS library should be used whenever
+ #  possible.)
+ #
+-BLASLIB      = ../../librefblas.a
+-LAPACKLIB    = liblapack.a
+-TMGLIB       = libtmglib.a
++BLASLIB      = ../../librefblas.so
++LAPACKLIB    = liblapack.so
++TMGLIB       = libtmglib.so
+diff -ru SRC/Makefile SRC/Makefile
+--- SRC/Makefile	2011-10-03 19:58:05.000000000 -0700
++++ SRC/Makefile	2012-01-13 11:56:57.000000000 -0800
+@@ -401,8 +401,7 @@
+ all: ../$(LAPACKLIB)
+ 
+ ../$(LAPACKLIB): $(ALLOBJ) $(ALLXOBJ)
+-	$(ARCH) $(ARCHFLAGS) $@ $(ALLOBJ) $(ALLXOBJ)
+-	$(RANLIB) $@
++	$(LOADER) $(LOADOPTS) -shared -Wl,-soname,liblapack.so -o $@ $(ALLOBJ)
+ 
+ single: $(SLASRC) $(DSLASRC) $(SXLASRC) $(SCLAUX) $(ALLAUX)
+ 	$(ARCH) $(ARCHFLAGS) ../$(LAPACKLIB) $(SLASRC) $(DSLASRC) \
+diff -ru TESTING/MATGEN/Makefile TESTING/MATGEN/Makefile
+--- TESTING/MATGEN/Makefile	2011-09-29 19:23:37.000000000 -0700
++++ TESTING/MATGEN/Makefile	2012-01-13 12:03:09.000000000 -0800
+@@ -59,8 +59,7 @@
+ 	$(DZATGEN)
+ 
+ ../../$(TMGLIB): $(ALLOBJ)
+-	$(ARCH) $(ARCHFLAGS) $@ $(ALLOBJ)
+-	$(RANLIB) $@
++	$(LOADER) $(LOADOPTS) -shared -Wl,-soname,libtmglib.so -o $@ $(ALLOBJ)
+ 
+ single: $(SMATGEN) $(SCATGEN)
+ 	$(ARCH) $(ARCHFLAGS) ../../$(TMGLIB) $(SMATGEN) $(SCATGEN)
