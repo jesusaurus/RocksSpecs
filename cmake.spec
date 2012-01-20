@@ -38,7 +38,6 @@ rm -rf $RPM_BUILD_ROOT/
 %defattr(-,root,root,-)
 /share/apps/bin/ccmake
 /share/apps/bin/cmake
-/share/apps/bin/cmake-gui
 /share/apps/bin/cpack
 /share/apps/bin/ctest
 /share/apps/share/aclocal/cmake.m4
