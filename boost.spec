@@ -1,6 +1,6 @@
 %define name	boost
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 1.48.0
 %define prefix	/share/apps
 
@@ -25,24 +25,14 @@ Boost %{version} for a Rocks Cluster.  Not intedended for distribution.
 ./bootstrap.sh --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %install
-./b2 --with-mpi --debug-configuration install
+#You may need to put info about python26 in $HOME/user-config.jam
+./b2 --with-mpi --with-math --with-filesystem --with-system --with-thread --with-iostreams --with-program_options --debug-configuration python=2.6 install
 
 %clean
 
 
 %files
    /share/apps/include/boost
-   /share/apps/lib/libboost_mpi.a
-   /share/apps/lib/libboost_mpi.so
-   /share/apps/lib/libboost_mpi.so.1.48.0
-   /share/apps/lib/libboost_mpi_python.a
-   /share/apps/lib/libboost_mpi_python.so
-   /share/apps/lib/libboost_mpi_python.so.1.48.0
-   /share/apps/lib/libboost_python.a
-   /share/apps/lib/libboost_python.so
-   /share/apps/lib/libboost_python.so.1.48.0
-   /share/apps/lib/libboost_serialization.a
-   /share/apps/lib/libboost_serialization.so
-   /share/apps/lib/libboost_serialization.so.1.48.0
+   /share/apps/lib/libboost_*
    /share/apps/lib/mpi.so
 
