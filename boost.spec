@@ -26,7 +26,7 @@ Boost %{version} for a Rocks Cluster.  Not intedended for distribution.
 
 %install
 #You may need to put info about python26 in $HOME/user-config.jam
-./b2 --with-mpi --with-math --with-filesystem --with-system --with-thread --with-iostreams --with-program_options --debug-configuration python=2.6 install
+./b2 --with-mpi --with-math --with-python --with-filesystem --with-system --with-thread --with-iostreams --with-program_options --debug-configuration python=2.6 install
 
 %clean
 
