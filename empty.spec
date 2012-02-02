@@ -9,6 +9,8 @@ Version:	%{version}
 Release:	%{dist}.%{release}
 Group:		Rocks
 License:	
+URL:		
+Source:		
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	
@@ -20,6 +22,7 @@ Summary:
 
 
 %prep
+%setup
 
 
 %build
