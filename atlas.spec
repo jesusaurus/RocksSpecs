@@ -1,6 +1,6 @@
 %define name	atlas
 %define dist	rocks
-%define release	3
+%define release	4
 %define version 3.8.4
 %define prefix	/share/apps
 
@@ -10,10 +10,10 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	BSD
 Source0:	%{name}%{version}.tar.bz2
-Source1:	AMD.tar.gz
-Source2:	UMFPACK.tar.gz
-Source3:	UFconfig.tar.gz
-Source4:	lapack-3.2.2.tgz
+Source1:	http://www.cise.ufl.edu/research/sparse/amd/current/AMD.tar.gz
+Source2:	http://www.cise.ufl.edu/research/sparse/umfpack/current/UMFPACK.tar.gz
+Source3:	http://www.cise.ufl.edu/research/sparse/UFconfig/current/UFconfig.tar.gz
+Source4:	http://www.netlib.org/lapack/lapack-3.2.2.tgz
 Patch0:		UFconfig.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
@@ -67,11 +67,13 @@ make library
 
 %install
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
-DESTDIR=$RPM_BUILD_ROOT/%{prefix} make install
+DESTDIR=$RPM_BUILD_ROOT%{prefix} make install
 cd ../../sparse/UMFPACK
-DESTDIR=$RPM_BUILD_ROOT/%{prefix} make install
+DESTDIR=$RPM_BUILD_ROOT%{prefix} make install
 cd ../AMD
-DESTDIR=$RPM_BUILD_ROOT/%{prefix} make install
+DESTDIR=$RPM_BUILD_ROOT%{prefix} make install
+cd ../UFconfig
+cp UFconfig.h $RPM_BUILD_ROOT${prefix}
 cd $RPM_BUILD_DIR/lapack-3.2.2
 cp lapack_LINUX.a $RPM_BUILD_ROOT/share/apps/lib/liblapack.a
 
