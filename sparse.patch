@@ -1,0 +1,109 @@
+--- UFconfig/UFconfig.mk	2011-12-08 11:19:48.000000000 -0800
++++ UFconfig/UFconfig.mk	2012-02-07 11:42:31.000000000 -0800
+@@ -67,15 +67,15 @@
+ 
+ # Fortran compiler (not required for 'make' or 'make library')
+ F77 = gfortran
+-F77FLAGS = $(FFLAGS) -O
++F77FLAGS = $(FFLAGS) -O -fPIC
+ F77LIB =
+ 
+ # C and Fortran libraries
+ LIB = -lm
+ 
+ # For "make install"
+-INSTALL_LIB = /usr/local/lib
+-INSTALL_INCLUDE = /usr/local/include
++INSTALL_LIB = /share/apps/lib
++INSTALL_INCLUDE = /share/apps/include
+ 
+ # For compiling MATLAB mexFunctions (MATLAB 7.5 or later)
+ MEX = mex -O -largeArrayDims -lmwlapack -lmwblas
+@@ -108,8 +108,8 @@
+ # naming the BLAS and LAPACK library (*.a or *.so) files.
+ 
+ # This is probably slow ... it might connect to the Standard Reference BLAS:
+-BLAS = -lblas -lgfortran
+-LAPACK = -llapack
++BLAS = -lblas -lgfortran -llapack -latlas -lf77blas -lcblas -L/share/apps/lib
++LAPACK = -lblas -lgfortran -llapack -latlas -lf77blas -lcblas  -L/share/apps/lib
+ 
+ # NOTE: this next option for the "Goto BLAS" has nothing to do with a "goto"
+ # statement.  Rather, the Goto BLAS is written by Dr. Kazushige Goto.
+@@ -148,8 +148,8 @@
+ # The path is relative to where it is used, in CHOLMOD/Lib, CHOLMOD/MATLAB, etc.
+ # You may wish to use an absolute path.  METIS is optional.  Compile
+ # CHOLMOD with -DNPARTITION if you do not wish to use METIS.
+-METIS_PATH = ../../metis-4.0
+-METIS = ../../metis-4.0/libmetis.a
++METIS_PATH = 
++METIS = 
+ 
+ #------------------------------------------------------------------------------
+ # UMFPACK configuration:
+@@ -170,7 +170,7 @@
+ #               included in UMFPACK_CONFIG, then UMFPACK  does not rely on
+ #               CHOLMOD, CAMD, CCOLAMD, COLAMD, and METIS.
+ 
+-UMFPACK_CONFIG =
++UMFPACK_CONFIG = -DNCHOLMOD
+ 
+ # uncomment this line to compile UMFPACK without CHOLMOD:
+ # UMFPACK_CONFIG = -DNCHOLMOD
+@@ -211,7 +211,7 @@
+ # -DNSUNPERF	    for Solaris only.  If defined, do not use the Sun
+ #			Performance Library
+ 
+-CHOLMOD_CONFIG =
++CHOLMOD_CONFIG = -DNPARTITION
+ 
+ # uncomment this line to compile CHOLMOD without METIS:
+ # CHOLMOD_CONFIG = -DNPARTITION
+--- UMFPACK/Makefile	2011-12-08 11:57:27.000000000 -0800
++++ UMFPACK/Makefile	2012-02-07 12:51:19.000000000 -0800
+@@ -64,14 +64,14 @@
+ 
+ # install UMFPACK
+ install:
+-	$(CP) Lib/libumfpack.a $(INSTALL_LIB)/libumfpack.$(VERSION).a
+-	( cd $(INSTALL_LIB) ; ln -sf libumfpack.$(VERSION).a libumfpack.a )
+-	$(CP) Include/*.h $(INSTALL_INCLUDE)
+-	chmod 644 $(INSTALL_LIB)/libumfpack*.a
+-	chmod 644 $(INSTALL_INCLUDE)/umfpack*.h
++	$(CP) Lib/libumfpack.a $(DESTDIR)$(INSTALL_LIB)/libumfpack.$(VERSION).a
++	( cd $(DESTDIR)$(INSTALL_LIB) ; ln -sf libumfpack.$(VERSION).a libumfpack.a )
++	$(CP) Include/*.h $(DESTDIR)$(INSTALL_INCLUDE)
++	chmod 644 $(DESTDIR)$(INSTALL_LIB)/libumfpack*.a
++	chmod 644 $(DESTDIR)$(INSTALL_INCLUDE)/umfpack*.h
+ 
+ # uninstall UMFPACK
+ uninstall:
+-	$(RM) $(INSTALL_LIB)/libumfpack*.a
+-	$(RM) $(INSTALL_INCLUDE)/umfpack*.h
++	$(RM) $(DESTDIR)$(INSTALL_LIB)/libumfpack*.a
++	$(RM) $(DESTDIR)$(INSTALL_INCLUDE)/umfpack*.h
+ 
+--- AMD/Makefile	2011-12-07 07:34:13.000000000 -0800
++++ AMD/Makefile	2012-02-09 12:08:28.000000000 -0800
+@@ -70,14 +70,14 @@
+ 
+ # install AMD
+ install:
+-	$(CP) Lib/libamd.a $(INSTALL_LIB)/libamd.$(VERSION).a
+-	( cd $(INSTALL_LIB) ; ln -sf libamd.$(VERSION).a libamd.a )
+-	$(CP) Include/amd.h $(INSTALL_INCLUDE)
+-	chmod 644 $(INSTALL_LIB)/libamd*
+-	chmod 644 $(INSTALL_INCLUDE)/amd.h
++	$(CP) Lib/libamd.a $(DESTDIR)$(INSTALL_LIB)/libamd.$(VERSION).a
++	( cd $(DESTDIR)$(INSTALL_LIB) ; ln -sf libamd.$(VERSION).a libamd.a )
++	$(CP) Include/amd.h $(DESTDIR)$(INSTALL_INCLUDE)
++	chmod 644 $(DESTDIR)$(INSTALL_LIB)/libamd*
++	chmod 644 $(DESTDIR)$(INSTALL_INCLUDE)/amd.h
+ 
+ # uninstall AMD
+ uninstall:
+-	$(RM) $(INSTALL_LIB)/libamd*.a
+-	$(RM) $(INSTALL_INCLUDE)/amd.h
++	$(RM) $(DESTDIR)$(INSTALL_LIB)/libamd*.a
++	$(RM) $(DESTDIR)$(INSTALL_INCLUDE)/amd.h
+ 
