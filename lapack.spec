@@ -9,6 +9,7 @@ Version:	%{version}
 Release:	%{dist}.%{release}
 Group:		Rocks
 License:	BSD
+URL:		http://www.netlib.org/lapack/lapack-3.4.0.tgz
 Source0:	%{name}-%{version}.tgz
 Patch0:		%{name}-%{version}.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
