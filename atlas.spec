@@ -43,7 +43,7 @@ mkdir ATLAS_LINUX
 %build
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 sed -i 's!\(DESTDIR\)=\([^ ]*\)!\1 \?= \2!' ../configure #we need a ?= instead of the =
-../configure -Fa alg -fPIC -Si cputhrchk 0 -Ss flapack %{prefix}/lib/liblapack.so --prefix=$RPM_BUILD_ROOT%{prefix}
+../configure -Fa alg -fPIC -Si cputhrchk 0 -Ss flapack %{prefix}/lib/liblapack.so --with-netlib-lapack=%{prefix}/lib/liblapack.so --prefix=$RPM_BUILD_ROOT%{prefix}
 sed -i '113 s/gcc/gcc -fPIC/' src/blas/gemv/Make.inc #inline patches, eww :(
 make
 cd lib
@@ -64,12 +64,16 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 export DESTDIR=$RPM_BUILD_ROOT%{prefix}
 make install
+cp lib/*so $RPM_BUILD_ROOT%{prefix}/
+
 cd ../../sparse/UMFPACK
 export DESTDIR=$RPM_BUILD_ROOT
 make install
+
 cd ../AMD
 export DESTDIR=$RPM_BUILD_ROOT
 make install
+
 cd ../UFconfig
 cp UFconfig.h $RPM_BUILD_ROOT%{prefix}/include
 
@@ -130,4 +134,3 @@ rm -rf sparse
 /share/apps/lib/libumfpack.5.5.2.a
 /share/apps/lib/libumfpack.a
 /share/apps/lib/libblas.a
-/share/apps/lib/libtmglib.a
