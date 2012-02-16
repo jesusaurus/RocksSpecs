@@ -25,8 +25,8 @@
  # This is probably slow ... it might connect to the Standard Reference BLAS:
 -BLAS = -lblas -lgfortran
 -LAPACK = -llapack
-+BLAS = -lblas -lgfortran -llapack -latlas -lf77blas -lcblas -L/share/apps/lib
-+LAPACK = -lblas -lgfortran -llapack -latlas -lf77blas -lcblas  -L/share/apps/lib
++BLAS = -lrefblas -lblas -lgfortran -llapack -latlas -lf77blas -lcblas -L/share/apps/lib
++LAPACK = -lrefblas -lblas -lgfortran -llapack -latlas -lf77blas -lcblas  -L/share/apps/lib
  
  # NOTE: this next option for the "Goto BLAS" has nothing to do with a "goto"
  # statement.  Rather, the Goto BLAS is written by Dr. Kazushige Goto.
