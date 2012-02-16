@@ -13,7 +13,7 @@ Source0:	%{name}%{version}.tar.bz2
 Source1:	AMD.tar.gz
 Source2:	UMFPACK.tar.gz
 Source3:	UFconfig.tar.gz
-Patch0:		UFconfig.patch
+Patch0:		sparse.patch
 Requires:	lapack
 BuildRequires:	lapack
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -43,7 +43,7 @@ mkdir ATLAS_LINUX
 %build
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 sed -i 's!\(DESTDIR\)=\([^ ]*\)!\1 \?= \2!' ../configure #we need a ?= instead of the =
-../configure -Fa alg -fPIC -Si cputhrchk 0 -Ss flapack $RPM_BUILD_ROOT/%{prefix}/lib/liblapack.a --prefix=%{prefix}
+../configure -Fa alg -fPIC -Si cputhrchk 0 -Ss flapack %{prefix}/lib/liblapack.so --prefix=$RPM_BUILD_ROOT%{prefix}
 sed -i '113 s/gcc/gcc -fPIC/' src/blas/gemv/Make.inc #inline patches, eww :(
 make
 cd lib
@@ -52,16 +52,26 @@ make shared; make ptshared
 cd $RPM_BUILD_DIR/sparse/UMFPACK
 make library
 
+cd $RPM_BUILD_DIR/sparse/AMD
+make
+
 
 %install
+
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT%{prefix}
+
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
-DESTDIR=$RPM_BUILD_ROOT/%{prefix} make install
+export DESTDIR=$RPM_BUILD_ROOT%{prefix}
+make install
 cd ../../sparse/UMFPACK
-DESTDIR=$RPM_BUILD_ROOT/%{prefix} make install
+export DESTDIR=$RPM_BUILD_ROOT
+make install
 cd ../AMD
-DESTDIR=$RPM_BUILD_ROOT/%{prefix} make install
-cd $RPM_BUILD_DIR/lapack-3.2.2
-cp lapack_LINUX.a $RPM_BUILD_ROOT/share/apps/lib/liblapack.a
+export DESTDIR=$RPM_BUILD_ROOT
+make install
+cd ../UFconfig
+cp UFconfig.h $RPM_BUILD_ROOT%{prefix}/include
 
 
 %clean
@@ -108,7 +118,8 @@ rm -rf sparse
 /share/apps/include/umfpack_transpose.h
 /share/apps/include/umfpack_triplet_to_col.h
 /share/apps/include/umfpack_wsolve.h
-/share/apps/lib/libamd.2.2.2.a
+/share/apps/include/UFconfig.h
+/share/apps/lib/libamd.2.2.3.a
 /share/apps/lib/libamd.a
 /share/apps/lib/libatlas.a
 /share/apps/lib/libcblas.a
@@ -116,7 +127,7 @@ rm -rf sparse
 /share/apps/lib/liblapack.a
 /share/apps/lib/libptcblas.a
 /share/apps/lib/libptf77blas.a
-/share/apps/lib/libumfpack.5.5.1.a
+/share/apps/lib/libumfpack.5.5.2.a
 /share/apps/lib/libumfpack.a
 /share/apps/lib/libblas.a
 /share/apps/lib/libtmglib.a
