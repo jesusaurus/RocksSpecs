@@ -1,6 +1,6 @@
 %define name	atlas
 %define dist	rocks
-%define release	3
+%define release	4
 %define version 3.8.4
 %define prefix	/share/apps
 
