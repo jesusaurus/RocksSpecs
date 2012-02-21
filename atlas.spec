@@ -2,6 +2,7 @@
 %define dist	rocks
 %define release	4
 %define version 3.8.4
+%define lversion 3.4.0
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -13,37 +14,42 @@ Source0:	%{name}%{version}.tar.bz2
 Source1:	AMD.tar.gz
 Source2:	UMFPACK.tar.gz
 Source3:	UFconfig.tar.gz
+Source4:	lapack-%{lversion}.tgz
 Patch0:		sparse.patch
-Requires:	lapack
-BuildRequires:	lapack
+Patch1:		lapack-%{lversion}.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
-Summary:	The ATLAS BLAS implementation.
+Summary:	The ATLAS BLAS/LAPACK implementation.
 
 %description
-ATLAS BLAS implementation for a Rocks Cluster.  Not intended for distribution, tuned for rocks.research.pdx.edu.
+ATLAS BLAS/LAPACK implementation for a Rocks Cluster.  Not intended for distribution, tuned for rocks.research.pdx.edu.
 
 %prep
-cd $RPM_BUILD_DIR
-rm -rf ATLAS
-tar -jxvf $RPM_SOURCE_DIR/%{name}%{version}.tar.bz2
-if [ $? -ne 0 ]; then
-  exit $?
-fi
+%setup -n ATLAS
 
 %setup -n sparse -T -a 1 -c
 %setup -n sparse -D -T -a 2
 %setup -n sparse -D -T -a 3
-%patch
+%patch0
+
+%setup -n lapack-%{lversion} -T -b 4
+cd $RPM_BUILD_DIR/lapack-%{lversion}
+cp INSTALL/make.inc.gfortran make.inc
+%patch1
 
 cd $RPM_BUILD_DIR/ATLAS
 mkdir ATLAS_LINUX
 
 
 %build
+cd $RPM_BUILD_DIR/lapack-%{lversion}
+make blaslib lapacklib tmglib
+cp librefblas.so liblapack.so libtmglib.so $RPM_BUILD_ROOT/%{prefix}/lib/
+
+
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 sed -i 's!\(DESTDIR\)=\([^ ]*\)!\1 \?= \2!' ../configure #we need a ?= instead of the =
-../configure -Fa alg -fPIC -Si cputhrchk 0 -Ss flapack %{prefix}/lib/liblapack.so --prefix=$RPM_BUILD_ROOT%{prefix}
+../configure -Fa alg -fPIC -Si cputhrchk 0 --with-netlib-lapack=../../lapack-%{lversion}/ --prefix=$RPM_BUILD_ROOT%{prefix}
 sed -i '113 s/gcc/gcc -fPIC/' src/blas/gemv/Make.inc #inline patches, eww :(
 make
 cd lib
@@ -79,9 +85,9 @@ cp UFconfig.h $RPM_BUILD_ROOT%{prefix}/include
 
 
 %clean
-cd $RPM_BUILD_DIR
-rm -rf ATLAS
-rm -rf sparse
+#cd $RPM_BUILD_DIR
+#rm -rf ATLAS
+#rm -rf sparse
 
 
 %files
@@ -137,6 +143,8 @@ rm -rf sparse
 /share/apps/lib/libcblas.so
 /share/apps/lib/libf77blas.so
 /share/apps/lib/liblapack.so
+/share/apps/lib/librefblas.so
+/share/apps/lib/libtmglib.so
 /share/apps/lib/libptcblas.so
 /share/apps/lib/libptf77blas.so
 
