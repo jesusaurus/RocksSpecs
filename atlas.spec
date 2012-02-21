@@ -49,7 +49,7 @@ cp librefblas.so liblapack.so libtmglib.so $RPM_BUILD_ROOT/%{prefix}/lib/
 
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 sed -i 's!\(DESTDIR\)=\([^ ]*\)!\1 \?= \2!' ../configure #we need a ?= instead of the =
-../configure -Fa alg -fPIC -Si cputhrchk 0 --with-netlib-lapack=../../lapack-%{lversion}/ --prefix=$RPM_BUILD_ROOT%{prefix}
+../configure -Fa alg -fPIC -Si cputhrchk 0 --with-netlib-lapack=$RPM_BUILD_ROOT%{prefix}/lib/liblapack.so --prefix=$RPM_BUILD_ROOT%{prefix}
 sed -i '113 s/gcc/gcc -fPIC/' src/blas/gemv/Make.inc #inline patches, eww :(
 make
 cd lib
