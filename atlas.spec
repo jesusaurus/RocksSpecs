@@ -133,10 +133,10 @@ rm -rf sparse
 /share/apps/lib/libptf77blas.a
 /share/apps/lib/libumfpack.5.5.2.a
 /share/apps/lib/libumfpack.a
-/share/apps/libatlas.so
-/share/apps/libcblas.so
-/share/apps/libf77blas.so
-/share/apps/liblapack.so
-/share/apps/libptcblas.so
-/share/apps/libptf77blas.so
+/share/apps/lib/libatlas.so
+/share/apps/lib/libcblas.so
+/share/apps/lib/libf77blas.so
+/share/apps/lib/liblapack.so
+/share/apps/lib/libptcblas.so
+/share/apps/lib/libptf77blas.so
 
