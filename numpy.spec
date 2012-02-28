@@ -50,3 +50,6 @@ python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 
 %files
+/share/apps/bin/f2py26
+/share/apps/lib64/python2.6/site-packages/numpy-1.6.1-py2.6.egg-info
+/share/apps/lib64/python2.6/site-packages/numpy/
