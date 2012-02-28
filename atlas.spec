@@ -16,6 +16,7 @@ Source2:	UMFPACK.tar.gz
 Source3:	UFconfig.tar.gz
 Source4:	lapack-%{lversion}.tgz
 Patch0:		sparse.patch
+Patch1:		lapack-%{lversion}.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Summary:	The ATLAS BLAS/LAPACK implementation.
@@ -34,6 +35,7 @@ ATLAS BLAS/LAPACK implementation for a Rocks Cluster.  Not intended for distribu
 %setup -n lapack-%{lversion} -T -b 4
 cd $RPM_BUILD_DIR/lapack-%{lversion}
 cp INSTALL/make.inc.gfortran make.inc
+%patch1
 
 cd $RPM_BUILD_DIR/ATLAS
 mkdir ATLAS_LINUX
@@ -81,9 +83,9 @@ cp UFconfig.h $RPM_BUILD_ROOT%{prefix}/include
 
 
 %clean
-#cd $RPM_BUILD_DIR
-#rm -rf ATLAS
-#rm -rf sparse
+cd $RPM_BUILD_DIR
+rm -rf ATLAS
+rm -rf sparse
 
 
 %files
