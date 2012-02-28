@@ -44,7 +44,7 @@ libraries = fftw3
 python26 setup.py build
 
 %install
-python26 setup.py install --prefix=$RPM_ROOT_DIR%{prefix}
+python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %clean
 
