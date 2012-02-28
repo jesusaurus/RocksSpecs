@@ -16,7 +16,6 @@ Source2:	UMFPACK.tar.gz
 Source3:	UFconfig.tar.gz
 Source4:	lapack-%{lversion}.tgz
 Patch0:		sparse.patch
-Patch1:		lapack-%{lversion}.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Summary:	The ATLAS BLAS/LAPACK implementation.
@@ -35,7 +34,6 @@ ATLAS BLAS/LAPACK implementation for a Rocks Cluster.  Not intended for distribu
 %setup -n lapack-%{lversion} -T -b 4
 cd $RPM_BUILD_DIR/lapack-%{lversion}
 cp INSTALL/make.inc.gfortran make.inc
-%patch1
 
 cd $RPM_BUILD_DIR/ATLAS
 mkdir ATLAS_LINUX
@@ -44,16 +42,15 @@ mkdir ATLAS_LINUX
 %build
 cd $RPM_BUILD_DIR/lapack-%{lversion}
 make blaslib lapacklib tmglib
-cp librefblas.so liblapack.so libtmglib.so $RPM_BUILD_ROOT/%{prefix}/lib/
+mkdir -p $RPM_BUILD_ROOT%{prefix}/lib/
+cp librefblas.a liblapack.a libtmglib.a $RPM_BUILD_ROOT%{prefix}/lib/
 
 
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 sed -i 's!\(DESTDIR\)=\([^ ]*\)!\1 \?= \2!' ../configure #we need a ?= instead of the =
-../configure -Fa alg -fPIC -Si cputhrchk 0 --with-netlib-lapack=$RPM_BUILD_ROOT%{prefix}/lib/liblapack.so --prefix=$RPM_BUILD_ROOT%{prefix}
+../configure -Fa alg -fPIC -Si cputhrchk 0 --with-netlib-lapack=$RPM_BUILD_ROOT%{prefix}/lib/liblapack.a --prefix=$RPM_BUILD_ROOT%{prefix}
 sed -i '113 s/gcc/gcc -fPIC/' src/blas/gemv/Make.inc #inline patches, eww :(
-make
-cd lib
-make shared; make ptshared
+make 
 
 cd $RPM_BUILD_DIR/sparse/UMFPACK
 make library
@@ -70,7 +67,6 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}
 cd $RPM_BUILD_DIR/ATLAS/ATLAS_LINUX
 export DESTDIR=$RPM_BUILD_ROOT%{prefix}
 make install
-cp lib/*so $RPM_BUILD_ROOT%{prefix}/lib/
 
 cd ../../sparse/UMFPACK
 export DESTDIR=$RPM_BUILD_ROOT
@@ -139,12 +135,3 @@ cp UFconfig.h $RPM_BUILD_ROOT%{prefix}/include
 /share/apps/lib/libptf77blas.a
 /share/apps/lib/libumfpack.5.5.2.a
 /share/apps/lib/libumfpack.a
-/share/apps/lib/libatlas.so
-/share/apps/lib/libcblas.so
-/share/apps/lib/libf77blas.so
-/share/apps/lib/liblapack.so
-/share/apps/lib/librefblas.so
-/share/apps/lib/libtmglib.so
-/share/apps/lib/libptcblas.so
-/share/apps/lib/libptf77blas.so
-
