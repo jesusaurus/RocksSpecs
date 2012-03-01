@@ -53,3 +53,5 @@ python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 
 %files
+/share/apps/lib64/python2.6/site-packages/scipy-0.10.0-py2.6.egg-info
+/share/apps/lib64/python2.6/site-packages/scipy/
