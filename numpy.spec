@@ -13,7 +13,11 @@ Source:		%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	python26
+BuildRequires:	atlas
+BuildRequires:	fftw3-devel
 Requires:	python26
+Requires:	atlas
+Requires:	ffw3
 Summary:	NumPy
 
 %description
