@@ -1,7 +1,7 @@
 %define name	scipy
 %define dist	rocks
 %define release	1
-%define version 1.6.1
+%define version 0.10.0
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -24,7 +24,7 @@ SciPy for a Rocks Cluster.  Not intedended for distribution.
 
 echo '
 [DEFAULT]
-library_dirs = /share/apps/lib
+library_dirs = /share/apps/lib:/share/apps/lib64
 include_dirs = /share/apps/include
 
 [atlas]
@@ -42,9 +42,11 @@ libraries = fftw3
 
 
 %build
+export PYTHONPATH=/share/apps/lib/python2.6/site-packages:/share/apps/lib64/python2.6/site-packages:$PYTHONPATH
 python26 setup.py build
 
 %install
+export PYTHONPATH=/share/apps/lib/python2.6/site-packages:/share/apps/lib64/python2.6/site-packages:$PYTHONPATH
 python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %clean
