@@ -30,7 +30,7 @@ cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT%{prefix}
 cd Obj/
 ../Src/obj_setup.sh
-../Src/configure --prefix=%{prefix} --with-blas="/share/apps/lib/libatlas.a /share/apps/lib/libcblas.a /share/apps/lib/libf77blas.a" --with-lapack=%{prefix}/lib/liblapack.a --with-scalapack=%{prefix}/lib/libscalapack.a --enable-mpi
+../Src/configure --prefix=%{prefix} --with-blas="-L/share/apps/lib -lcblas -lf77blas -latlas" --with-lapack="-L/share/apps/lib -llapack" --with-scalapack=%{prefix}/lib/libscalapack.a --with-blacs=%{prefix}/lib/libscalapack.a --enable-mpi
 make
 
 
