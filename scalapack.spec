@@ -40,3 +40,4 @@ cp $RPM_BUILD_DIR/%{inst}/libscalapack.a $RPM_BUILD_ROOT/%{prefix}/lib/
 
 
 %files
+/share/apps/lib/libscalapack.a
