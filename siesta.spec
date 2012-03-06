@@ -1,9 +1,9 @@
 %define name	siesta
 %define dist	rocks
-%define release	2
-%define version 3.0
+%define release	3
+%define version 3.1
 %define prefix	/share/apps
-%define inst	%{name}-%{version}-rc2
+%define inst	%{name}-%{version}
 
 Name:		%{name}
 Version:	%{version}
@@ -12,7 +12,7 @@ Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-Source:		siesta-3.0-rc2.tgz
+Source:		siesta-%{version}.tgz
 Requires:	scalapack
 BuildRequires:	scalapack
 Summary:	Siesta
@@ -30,7 +30,7 @@ cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT%{prefix}
 cd Obj/
 ../Src/obj_setup.sh
-../Src/configure --prefix=%{prefix} --with-blas=%{prefix}/lib/libblas.a --with-lapack=%{prefix}/lib/liblapack.a --with-scalapack=%{prefix}/lib/libscalapack.a --with-blacs="%{prefix}/lib/blacsF77init_MPI.a %{prefix}/lib/blacsCinit_MPI.a %{prefix}/lib/blacs_MPI.a %{prefix}/lib/blacsCinit_MPI.a %{prefix}/lib/blacsF77init_MPI.a" --enable-mpi
+../Src/configure --prefix=%{prefix} --with-blas="/share/apps/lib/libatlas.a /share/apps/lib/libcblas.a /share/apps/lib/libf77blas.a" --with-lapack=%{prefix}/lib/liblapack.a --with-scalapack=%{prefix}/lib/libscalapack.a --enable-mpi
 make
 
 
