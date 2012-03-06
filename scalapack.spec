@@ -33,8 +33,7 @@ make
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/lib
-#cp $RPM_BUILD_DIR/%{inst}/libscalapack.a $RPM_BUILD_ROOT/%{prefix}/lib/
-make install
+cp $RPM_BUILD_DIR/%{inst}/libscalapack.a $RPM_BUILD_ROOT/%{prefix}/lib/
 
 
 %clean
