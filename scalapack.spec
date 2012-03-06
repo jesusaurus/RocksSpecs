@@ -1,7 +1,7 @@
 %define name	scalapack
 %define dist	rocks
-%define release	2
-%define version 1.8.0
+%define release	1
+%define version 2.0.1
 %define prefix	/share/apps
 %define inst	%{name}-%{version}
 
@@ -15,9 +15,7 @@ Prefix:		%{prefix}
 Source:		%{inst}.tgz
 Source1:	SLmake.rocks
 Requires:	atlas
-Requires:	blacs
 BuildRequires:	atlas
-BuildRequires:	blacs
 Summary:	ScaLAPACK
 
 %description
@@ -35,11 +33,11 @@ make
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/lib
-cp $RPM_BUILD_DIR/%{inst}/libscalapack.a $RPM_BUILD_ROOT/%{prefix}/lib/
+#cp $RPM_BUILD_DIR/%{inst}/libscalapack.a $RPM_BUILD_ROOT/%{prefix}/lib/
+make install
 
 
 %clean
 
 
 %files
-/share/apps/lib/libscalapack.a
