@@ -1,4 +1,4 @@
-%define name	r
+%define name	R
 %define dist	rocks
 %define release	1
 %define version 2.14.2
