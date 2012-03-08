@@ -10,7 +10,7 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	GPL
 URL:		http://www.r-project.org/
-Source:		R.%{version}.tar.gz
+Source:		R-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	readline-devel
