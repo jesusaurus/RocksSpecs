@@ -33,7 +33,7 @@ make
 
 
 %install
-DESTDIR="$RPM_BUILD_ROOT%{prefix}" make install
+DESTDIR="$RPM_BUILD_ROOT" make install
 
 
 %clean
