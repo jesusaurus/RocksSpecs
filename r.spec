@@ -17,10 +17,10 @@ BuildRequires:	readline-devel
 BuildRequires:	atlas
 Requires:	readline
 Requires:	atlas
-Summary:	
+Summary:	R Project for Statistical Computing
 
 %description
- for a Rocks Cluster.  Not intended for redistribution.
+R Project for a Rocks Cluster.  Not intended for redistribution.
 
 
 %prep
