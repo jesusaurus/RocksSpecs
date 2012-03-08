@@ -37,7 +37,11 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 
 
 %clean
+rm -r "$RPM_BUILD_ROOT"
 
 
 %files
+%{prefix}/bin/R
+%{prefix}/bin/Rscript
+%{prefix}/lib64/R
 
