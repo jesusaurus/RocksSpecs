@@ -1,7 +1,7 @@
 %define name	armadillo
 %define dist	rocks
 %define release	1
-%define version 2.4.2
+%define version 2.4.4
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -10,7 +10,7 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	unknown
 URL:		http://arma.sourceforge.net/
-Source:		http://sourceforge.net/projects/arma/files/armadillo-2.4.2.tar.gz
+Source:		http://sourceforge.net/projects/arma/files/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	atlas
@@ -43,7 +43,7 @@ rm -rf $RPM_BUILD_ROOT
 /share/apps/include/armadillo_itpp
 /share/apps/lib/libarmadillo.so
 /share/apps/lib/libarmadillo.so.2
-/share/apps/lib/libarmadillo.so.2.4.2
+/share/apps/lib/libarmadillo.so.%{version}
 /share/apps/share/Armadillo/CMake/ArmadilloConfig.cmake
 /share/apps/share/Armadillo/CMake/ArmadilloConfigVersion.cmake
 /share/apps/share/Armadillo/CMake/ArmadilloLibraryDepends-noconfig.cmake
