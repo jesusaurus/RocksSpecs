@@ -26,7 +26,7 @@ QT opensource for a Rocks Cluster (only installed onto the frontend).
 
 
 %build
-echo 'yes' | ./configure --prefix=%{buildroot}%{prefix} --opensource
+echo 'yes' | ./configure --prefix=%{prefix} --opensource
 make
 
 
@@ -38,6 +38,7 @@ INSTALL_ROOT=%{buildroot} make install
 
 %clean
 make clean
+rm -rf %{buildroot}
 
 %files
 
