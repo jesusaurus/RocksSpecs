@@ -44,4 +44,4 @@ rm -r "$RPM_BUILD_ROOT"
 %{prefix}/bin/R
 %{prefix}/bin/Rscript
 %{prefix}/lib64/R
-
+%doc %{prefix}/share/man/man1/
