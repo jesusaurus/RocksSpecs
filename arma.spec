@@ -26,7 +26,7 @@ Armadillo for a Rocks Cluster.  Not intedended for distribution.
 %setup 
 
 %build
-cmake -DCMAKE_PREFIX_PATH=/share/apps -DCMAKE_INSTALL_PREFIX=$RPM_BUILD_ROOT%{prefix} .
+cmake -DCMAKE_PREFIX_PATH=/share/apps -DBLAS_LIBRARY=/share/apps/lib/libatlas.a -DCMAKE_INSTALL_PREFIX=$RPM_BUILD_ROOT%{prefix} .
 make
 
 
