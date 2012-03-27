@@ -22,12 +22,12 @@ SWIG for a Rocks Cluster.  Not intedended for distribution.
 %setup -n swig-%{version}
 
 %build
-./configure --prefix=$RPM_BUILD_ROOT%{prefix}
+./configure --prefix=%{prefix}
 make
 
 
 %install
-make install
+DESTDIR=$RPM_BUILD_ROOT make install
 
 %clean
 
