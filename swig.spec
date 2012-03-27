@@ -1,6 +1,6 @@
-%define name	SWIG
+%define name	swig
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 2.0.4
 %define prefix	/share/apps
 
