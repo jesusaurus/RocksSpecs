@@ -20,7 +20,7 @@ SWIG for a Rocks Cluster.  Not intedended for distribution.
 
 
 %prep
-%setup -n swig-%{version}
+%setup
 
 
 %build
@@ -34,7 +34,7 @@ DESTDIR=$RPM_BUILD_ROOT make install
 
 %clean
 rm -r $RPM_BUILD_ROOT
-rm -r $RPM_BUILD_DIR
+rm -r $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %files
