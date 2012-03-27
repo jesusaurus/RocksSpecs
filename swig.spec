@@ -18,8 +18,10 @@ Summary:	SWIG
 %description
 SWIG for a Rocks Cluster.  Not intedended for distribution.
 
+
 %prep
 %setup -n swig-%{version}
+
 
 %build
 ./configure --prefix=%{prefix}
@@ -29,7 +31,10 @@ make
 %install
 DESTDIR=$RPM_BUILD_ROOT make install
 
+
 %clean
+rm -r $RPM_BUILD_ROOT
+rm -r $RPM_BUILD_DIR
 
 
 %files
