@@ -15,14 +15,14 @@ BuildRequires:	FIAT
 BuildRequires:	Instant
 BuildRequires:	Viper
 BuildRequires:	UFL
-BuildRequires:	DOLFIN
+BuildRequires:	Dolfin
 BuildRequires:	UFC
 Requires:	FFC
 Requires:	FIAT
 Requires:	Instant
 Requires:	Viper
 Requires:	UFL
-Requires:	DOLFIN
+Requires:	Dolfin
 Requires:	UFC
 Summary:	Fenics Project Meta-Package
 
