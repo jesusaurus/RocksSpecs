@@ -24,11 +24,26 @@ NumPy for a Rocks Cluster.  Not intended for redistribution.
 %prep
 %setup -n numpy-%{version}
 
+echo '
+[DEFAULT]
+library_dirs = /share/apps/lib
+include_dirs = /share/apps/include
+
+[atlas]
+atlas_libs = lapack, f77blas, cblas, atlas
+
+[amd]
+amd_libs = amd
+
+[umfpack]
+umfpack_libs = umfpack, gfortran
+
+[fftw]
+libraries = fftw3
+' > site.cfg
+
 
 %build
-export BLAS=/share/apps/lib/libblas.a
-export LAPACK=/share/apps/lib/liblapack.a
-export ATLAS=/share/apps/lib/libatlas.a
 python26 setup.py build
 
 

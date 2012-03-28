@@ -1,6 +1,6 @@
 %define name	blacs
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 1.1
 %define prefix	/share/apps
 %define inst	BLACS

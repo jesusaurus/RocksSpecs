@@ -1,0 +1,15 @@
+diff -ru make.inc make.inc
+--- make.inc	2012-01-13 12:08:53.000000000 -0800
++++ make.inc	2012-01-13 11:51:19.000000000 -0800
+@@ -13,9 +13,9 @@
+ #  desired load options for your machine.
+ #
+ FORTRAN  = gfortran 
+-OPTS     = -O2
++OPTS     = -O2 -fPIC -m64
+ DRVOPTS  = $(OPTS)
+-NOOPT    = -O0
++NOOPT    = -O0 -fPIC -m64
+ LOADER   = gfortran
+ LOADOPTS =
+ #
