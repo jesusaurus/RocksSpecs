@@ -41,7 +41,7 @@ make install
 
 %clean
 rm -r $RPM_BUILD_ROOT
-rm -r $RPM_BUILD_DIR/%{name}-%{version}
+rm -r $RPM_BUILD_DIR/%{inst}
 
 
 %files
@@ -59,8 +59,6 @@ rm -r $RPM_BUILD_DIR/%{name}-%{version}
 /share/apps/lib/python2.6/site-packages/dolfin_utils/
 /share/apps/lib64/python2.6/site-packages/dolfin/
 /share/apps/share/dolfin/
-
-%config /share/apps/share/dolfin/dolfin.conf
 
 %doc /share/apps/share/man/man1/dolfin-convert.1.gz
 %doc /share/apps/share/man/man1/dolfin-order.1.gz
