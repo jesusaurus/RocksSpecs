@@ -17,7 +17,7 @@ BuildRequires:	atlas
 BuildRequires:	fftw3-devel
 Requires:	python26
 Requires:	atlas
-Requires:	ffw3
+Requires:	fftw3
 Summary:	SciPy
 
 %description
