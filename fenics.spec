@@ -24,6 +24,7 @@ Fenics Project meta-project for a Rocks Cluster.  Not intended for redistributio
 Contains FFC, FIAT, Instant, Viper, UFL, Dolfin, and UFC.
 
 %prep
+mkdir -p $RPM_BUILD_ROOT
 
 
 %build
@@ -33,6 +34,7 @@ Contains FFC, FIAT, Instant, Viper, UFL, Dolfin, and UFC.
 
 
 %clean
+rmdir $RPM_BUILD_ROOT
 
 
 %files
