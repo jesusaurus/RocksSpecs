@@ -15,6 +15,8 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	cmake
 BuildRequires:	python26-devel
+BuildRequires:	swig
+Requires:	swig
 Summary:	UFC
 
 %description
