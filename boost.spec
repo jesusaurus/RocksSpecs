@@ -13,6 +13,8 @@ URL:		http://www.boost.org/
 Source:		http://sourceforge.net/projects/boost/files/boost/1.48.0/boost_1_48_0.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
+BuildRequires:	python26-devel
+Requires:	python26
 Summary:	Boost %{version}
 
 %description
@@ -25,7 +27,7 @@ Boost %{version} for a Rocks Cluster.  Not intedended for distribution.
 ./bootstrap.sh --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %install
-#You may need to put info about python26 in $HOME/user-config.jam
+#You need to put info about python26 in $HOME/user-config.jam
 ./b2 --with-mpi --with-math --with-python --with-filesystem --with-system --with-thread --with-iostreams --with-program_options --debug-configuration python=2.6 install
 
 %clean
