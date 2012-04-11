@@ -14,7 +14,7 @@ Source:		%{name}lib-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	python26-devel
-BuildRequires:	python26-numpy
+BuildRequires:	numpy
 BuildRequires:	geos-devel
 Requires:	glibc
 Requires:	python26
@@ -32,11 +32,13 @@ Matplot for a Rocks Cluster.  Not intended for redistribution.
 
 %build
 export GEOS_DIR=/usr
+export PYTHONPATH=/share/apps/lib/python2.6/site-packages:/share/apps/lib64/python2.6/site-packages:$PYTHONPATH
 python26 setup.py build
 
 
 %install
 export GEOS_DIR=/usr
+export PYTHONPATH=/share/apps/lib/python2.6/site-packages:/share/apps/lib64/python2.6/site-packages:$PYTHONPATH
 python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 
