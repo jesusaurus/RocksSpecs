@@ -14,7 +14,7 @@ Source:		%{name}lib-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	python26-devel
-BuildRequires:	numpy
+BuildRequires:	python26-numpy
 BuildRequires:	geos-devel
 Requires:	glibc
 Requires:	python26
@@ -46,3 +46,7 @@ python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 
 %files
+/share/apps/lib64/python2.6/site-packages/matplotlib-1.1.0-py2.6.egg-info
+/share/apps/lib64/python2.6/site-packages/matplotlib/
+/share/apps/lib64/python2.6/site-packages/dateutil/
+
