@@ -1,7 +1,7 @@
 %define name	matplot
 %define dist	rocks
 %define release	1
-%define version 1.0.2
+%define version 1.1.0
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -10,7 +10,7 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	PSF
 URL:		http://matplotlib.sourceforge.net/
-Source:		basemap-%{version}.tar.gz
+Source:		%{name}lib-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	python26-devel
@@ -27,7 +27,7 @@ Matplot for a Rocks Cluster.  Not intended for redistribution.
 
 
 %prep
-%setup -n basemap-%{version}
+%setup -n %{name}lib-%{version}
 
 
 %build
@@ -44,6 +44,3 @@ python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 
 %files
-/share/apps/lib64/python2.6/site-packages/_geoslib.so
-/share/apps/lib64/python2.6/site-packages/basemap-1.0.2-py2.6.egg-info
-/share/apps/lib64/python2.6/site-packages/mpl_toolkits/
