@@ -14,7 +14,9 @@ Source:		http://launchpad.net/ufc/2.0.x/2.0.5/+download/ufc-2.0.5.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	cmake
+BuildRequires:	swig
 BuildRequires:	python26-devel
+Requires:	swig
 Summary:	UFC
 
 %description
