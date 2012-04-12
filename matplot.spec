@@ -49,4 +49,9 @@ python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 /share/apps/lib64/python2.6/site-packages/matplotlib-1.1.0-py2.6.egg-info
 /share/apps/lib64/python2.6/site-packages/matplotlib/
 /share/apps/lib64/python2.6/site-packages/dateutil/
+/share/apps/lib64/python2.6/site-packages/mpl_toolkits/
+/share/apps/lib64/python2.6/site-packages/pylab.py
+/share/apps/lib64/python2.6/site-packages/pylab.pyc
+/share/apps/lib64/python2.6/site-packages/pylab.pyo
+/share/apps/lib64/python2.6/site-packages/pytz/
 
