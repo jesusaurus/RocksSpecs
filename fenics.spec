@@ -10,13 +10,6 @@ Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		/share/apps
-BuildRequires:	FFC
-BuildRequires:	FIAT
-BuildRequires:	Instant
-BuildRequires:	Viper
-BuildRequires:	UFL
-BuildRequires:	Dolfin
-BuildRequires:	UFC
 Requires:	FFC
 Requires:	FIAT
 Requires:	Instant
@@ -28,9 +21,10 @@ Summary:	Fenics Project Meta-Package
 
 %description
 Fenics Project meta-project for a Rocks Cluster.  Not intended for redistribution.
-Contains FFC, FIAT, Instant, Viper, UFL, DOLFIN, and UFC.
+Contains FFC, FIAT, Instant, Viper, UFL, Dolfin, and UFC.
 
 %prep
+mkdir -p $RPM_BUILD_ROOT
 
 
 %build
@@ -40,6 +34,7 @@ Contains FFC, FIAT, Instant, Viper, UFL, DOLFIN, and UFC.
 
 
 %clean
+rmdir $RPM_BUILD_ROOT
 
 
 %files

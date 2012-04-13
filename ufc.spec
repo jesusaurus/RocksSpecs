@@ -16,6 +16,7 @@ Prefix:		%{prefix}
 BuildRequires:	cmake
 BuildRequires:	swig
 BuildRequires:	python26-devel
+BuildRequires:	swig
 Requires:	swig
 Summary:	UFC
 
