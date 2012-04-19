@@ -8,7 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{dist}.%{release}
 Group:		Rocks
-License:	
+License:        Other
 URL:		http://dirac.cnrs-orleans.fr/plone/software/scientificpython/
 Source:		https://sourcesup.renater.fr/frs/download.php/2309/ScientificPython-2.8.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -22,14 +22,14 @@ Python Scientific for a Rocks Cluster.  Not intended for redistribution.
 
 
 %prep
-%setup
+%setup -n ScientificPython-%{version}
 
 
 %build
-python26 build --prefix=%{prefix}
+python26 setup.py build
 
 %install
-python26 install --prefix=$RPM_BUILD_ROOT/%{prefix}
+python26 setup.py install --prefix=$RPM_BUILD_ROOT/%{prefix}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
