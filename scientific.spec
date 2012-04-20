@@ -42,4 +42,9 @@ python26 setup.py install --prefix=$RPM_BUILD_ROOT/%{prefix}
 rm -rf $RPM_BUILD_ROOT
 
 %files
+/share/apps/bin/bsp_virtual
+/share/apps/bin/task_manager
+/share/apps/include/python2.6/Scientific/
+/share/apps/lib64/python2.6/site-packages/Scientific/
+/share/apps/lib64/python2.6/site-packages/ScientificPython-2.8-py2.6.egg-info
 
