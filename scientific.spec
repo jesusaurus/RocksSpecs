@@ -32,7 +32,7 @@ Python Scientific for a Rocks Cluster.  Not intended for redistribution.
 %patch
 
 %build
-export PYTHONPATH=/share/apps/lib/python2.6/site-packages/:share/apps/lib64/python2.6/site-packages/:$PYTHONPATH
+export PYTHONPATH=/share/apps/lib/python2.6/site-packages/:/share/apps/lib64/python2.6/site-packages/:$PYTHONPATH
 python26 setup.py build
 
 %install
