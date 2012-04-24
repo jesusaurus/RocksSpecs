@@ -32,6 +32,8 @@ Summary:
 
 
 %clean
+rm -r $RPM_BUILD_ROOT
+rm -r $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %files
