@@ -38,7 +38,7 @@ PETSc for a Rocks Cluster.  Not intended for redistribution.
 
 
 %build
-python26 configure --with-blas-lapack-dir=/share/apps/lib --download-blacs=yes --with-mpi-dir=/opt/openmpi --with-hdf5-dir=/share/apps --with-umfpack-dir=/share/apps --with-scalapack-dir=/share/apps/ --with-numpy=/share/apps/lib64/python2.6/site-packages/numpy  --with-fiat-dir=/share/apps/lib/python2.6/site-packages/FIAT --with-scientificpython-dir=/share/apps/lib64/python2.6/site-packages/Scientific --with-x=0 --prefix=$RPM_BUILD_ROOT/%{prefix}
+python26 configure --with-blas-lapack-dir=/share/apps/lib --download-blacs=yes --with-mpi-dir=/opt/openmpi --with-hdf5-dir=/share/apps --with-umfpack-dir=/share/apps --with-scalapack-dir=/share/apps/ --with-numpy=/share/apps/lib64/python2.6/site-packages/numpy  --with-fiat-dir=/share/apps/lib/python2.6/site-packages/FIAT --with-scientificpython-dir=/share/apps/lib64/python2.6/site-packages/Scientific --with-x=0 --prefix=$RPM_BUILD_ROOT/%{prefix} --with-shared-libraries=1 --with-pic=1
 make all test
 
 
