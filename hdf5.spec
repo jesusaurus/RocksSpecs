@@ -1,7 +1,7 @@
 %define name    hdf5
 %define dist    rocks
 %define release 1
-%define version 1.8.8
+%define version 1.8.9
 
 Name:           %{name}
 Version:        %{version}
@@ -9,7 +9,7 @@ Release:        %{dist}.%{release}
 Group:          Rocks
 License:       	Other
 URL:		http://hdfgroup.org/
-Source0:        hdf5-1.8.8.tar.gz
+Source0:        hdf5-1.8.9.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:         /share/apps
 Summary:        Parallel HDF5
@@ -23,7 +23,7 @@ Parallel HDF5 with Fortran support for a Rocks Cluster.  Not intended for redist
 
 %build
 cd $RPM_BUILD_DIR/%{name}-%{version}
-CC=mpicc LDFLAGS="-L/share/apps/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include $CPPFLAGS" ./configure --prefix=/share/apps --enable-parallel --enable-fortran
+CC=mpicc LDFLAGS="-L/share/apps/lib $LDFLAGS" CPPFLAGS="-fPIC -I/share/apps/include $CPPFLAGS" ./configure --prefix=/share/apps --enable-parallel --enable-fortran
 make
 
 
