@@ -1,2 +1,1 @@
 using mpi ;
-using python : 2.6 : /usr/bin/python26 ;

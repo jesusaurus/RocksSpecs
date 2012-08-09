@@ -1,7 +1,8 @@
 %define name	boost
 %define dist	rocks
-%define release	2
-%define version 1.48.0
+%define release	1
+%define version 1.50.0
+%define altvers 1_50_0
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -10,19 +11,17 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	unknown
 URL:		http://www.boost.org/
-Source:		http://sourceforge.net/projects/boost/files/boost/1.48.0/boost_1_48_0.tar.gz
+Source:		http://sourceforge.net/projects/boost/files/boost/%{version}/boost_%{altvers}.tar.gz
 Source1:	boost-user-config.jam
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-BuildRequires:	python26-devel
-Requires:	python26
 Summary:	Boost %{version}
 
 %description
 Boost %{version} for a Rocks Cluster.  Not intedended for distribution.
 
 %prep
-%setup -n boost_1_48_0
+%setup -n boost_%{altvers}
 
 %build
 ./bootstrap.sh --prefix=$RPM_BUILD_ROOT%{prefix}
