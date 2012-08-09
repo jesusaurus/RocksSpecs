@@ -1,6 +1,6 @@
 %define name	suitesparse
 %define dist	rocks
-%define release	1
+%define release	2
 %define version 4.0.2
 %define prefix	/share/apps
 
@@ -15,6 +15,8 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Requires:       atlas
 BuildRequires:  atlas
+Provides:       suitesparse
+Provides:       suitesparse-devel
 Summary:	SuiteSparse
 
 %description
