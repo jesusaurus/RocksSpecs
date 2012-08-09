@@ -1,0 +1,49 @@
+--- SuiteSparse_config/SuiteSparse_config.mk	2012-06-20 22:04:45.000000000 -0700
++++ SuiteSparse_config/SuiteSparse_config.mk	2012-08-07 12:07:00.649992557 -0700
+@@ -73,7 +73,7 @@
+ 
+ # Fortran compiler (not required for 'make' or 'make library')
+ F77 = gfortran
+-F77FLAGS = $(FFLAGS) -O
++F77FLAGS = $(FFLAGS) -O -fPIC
+ F77LIB =
+ 
+ # C and Fortran libraries.  Remove -lrt if you don't have it.
+@@ -82,8 +82,8 @@
+ # LIB = -lm
+ 
+ # For "make install"
+-INSTALL_LIB = /usr/local/lib
+-INSTALL_INCLUDE = /usr/local/include
++INSTALL_LIB = ${DESTDIR}/share/apps/lib
++INSTALL_INCLUDE = ${DESTDIR}/share/apps/include
+ 
+ # Which version of MAKE you are using (default is "make")
+ # MAKE = make
+@@ -106,7 +106,7 @@
+ # naming the BLAS and LAPACK library (*.a or *.so) files.
+ 
+ # This is probably slow ... it might connect to the Standard Reference BLAS:
+-BLAS = -lblas -lgfortran
++BLAS = -latlas -lcblas -lf77blas -lgfortran -L${INSTALL_LIB}
+ LAPACK = -llapack
+ 
+ # NOTE: this next option for the "Goto BLAS" has nothing to do with a "goto"
+--- SuiteSparse_config/Makefile	2012-07-17 07:46:31.000000000 -0700
++++ SuiteSparse_config/Makefile	2012-08-08 17:35:14.023992122 -0700
+@@ -18,7 +18,6 @@
+ 	$(CC) $(CF) -c SuiteSparse_config.c
+ 	$(ARCHIVE) libsuitesparseconfig.a SuiteSparse_config.o
+ 	$(RANLIB) libsuitesparseconfig.a
+-	- $(RM) SuiteSparse_config.o
+ 
+ distclean: purge
+ 
+@@ -26,6 +25,7 @@
+ 	- $(RM) *.o *.a
+ 
+ clean:
++	- $(RM) SuiteSparse_config.o
+ 	- $(RM) -r $(CLEAN)
+ 
+ # install SuiteSparse_config
