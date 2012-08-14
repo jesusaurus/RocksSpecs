@@ -33,6 +33,8 @@ mkdir LINUX
 
 
 %build
+# make sure that cpu throttling is off
+# /usr/bin/cpufreq-selector -g performance
 
 cd $RPM_BUILD_DIR/ATLAS/LINUX
 sed -i 's!\(DESTDIR\)=\([^ ]*\)!\1 \?= \2!' ../configure #we need a ?= instead of the =
