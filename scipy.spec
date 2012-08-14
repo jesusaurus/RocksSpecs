@@ -1,7 +1,7 @@
 %define name	scipy
 %define dist	rocks
 %define release	1
-%define version 0.10.0
+%define version 0.10.1
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -12,12 +12,10 @@ License:	unknown
 Source:		%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-BuildRequires:	python26
 BuildRequires:	atlas
-BuildRequires:	fftw3-devel
-Requires:	python26
-Requires:	atlas
-Requires:	fftw3
+BuildRequires:	fftw-devel
+Requires:	atlas-devel
+Requires:	fftw
 Summary:	SciPy
 
 %description
@@ -47,15 +45,15 @@ libraries = fftw3
 
 %build
 export PYTHONPATH=/share/apps/lib/python2.6/site-packages:/share/apps/lib64/python2.6/site-packages:$PYTHONPATH
-python26 setup.py build
+python setup.py build
 
 %install
 export PYTHONPATH=/share/apps/lib/python2.6/site-packages:/share/apps/lib64/python2.6/site-packages:$PYTHONPATH
-python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
+python setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %clean
 
 
 %files
-/share/apps/lib64/python2.6/site-packages/scipy-0.10.0-py2.6.egg-info
+/share/apps/lib64/python2.6/site-packages/scipy-%{version}-py2.6.egg-info
 /share/apps/lib64/python2.6/site-packages/scipy/
