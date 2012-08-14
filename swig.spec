@@ -1,7 +1,7 @@
 %define name	swig
 %define dist	rocks
-%define release	2
-%define version 2.0.4
+%define release	1
+%define version 2.0.7
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -10,7 +10,7 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	unknown
 URL:		http://www.swig.org/
-Source:		http://prdownloads.sourceforge.net/swig/swig-2.0.4.tar.gz
+Source:		http://prdownloads.sourceforge.net/swig/swig-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Summary:	SWIG
@@ -40,5 +40,5 @@ rm -r $RPM_BUILD_DIR/%{name}-%{version}
 %files
    /share/apps/bin/ccache-swig
    /share/apps/bin/swig
-   /share/apps/share/swig/2.0.4/
+   /share/apps/share/swig/%{version}/
 %doc /share/apps/share/man/man1/ccache-swig.1
