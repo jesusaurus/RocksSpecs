@@ -1,7 +1,7 @@
-%define name	python26-numpy
+%define name	numpy
 %define dist	rocks
 %define release	1
-%define version 1.6.1
+%define version 1.6.2
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -13,8 +13,6 @@ URL:		http://www.scipy.org/
 Source:		numpy-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		%{prefix}
-BuildRequires:	python26-devel
-Requires:	python26
 Summary:	NumPy
 
 %description
@@ -44,18 +42,19 @@ libraries = fftw3
 
 
 %build
-python26 setup.py build
+python setup.py build
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}
-python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
+python setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 
 %clean
 
 
 %files
-/share/apps/bin/f2py26
-/share/apps/lib64/python2.6/site-packages/numpy-1.6.1-py2.6.egg-info
+/share/apps/bin/f2py
+/share/apps/lib64/python2.6/site-packages/numpy-%{version}-py2.6.egg-info
 /share/apps/lib64/python2.6/site-packages/numpy/
+
