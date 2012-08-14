@@ -1,7 +1,7 @@
 %define name		quantum-espresso
 %define dist		rocks
 %define release		2
-%define version		4.3
+%define version		4.3.2
 %define wversion	2.3.0
 %define prefix		/share/apps
 %define inst		espresso-%{version}
@@ -15,8 +15,6 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 Source0:	espresso-%{version}.tar.gz
 Source1:	want-%{wversion}.tar.gz
-BuildRequires:	gcc44
-BuildRequires:	gcc44-gfortran
 Summary:	Quantum Espresso with WanT
 
 %description
@@ -32,14 +30,8 @@ Quantum Espresso with WanT plugin for a Rocks Cluster.  Not intended for redistr
 cd $RPM_BUILD_DIR/%{inst}
 mkdir -p $RPM_BUILD_ROOT%{prefix}
 export GFORTRAN_UNBUFFERED_ALL=1
-export OMPI_CC=gcc44 
-export OMPI_FC=gfortran44 
-export OMPI_F77=gfortran44 
 CC=mpicc FC=mpif90 F90=gfortran44 ./configure --enable-parallel LIBDIRS="/share/apps/lib /opt/openmpi/lib" FFLAGS="-I/opt/openmpi/include" CFLAGS="-I/opt/openmpi/include" && make pwall want
 unset GFORTRAN_UNBUFFERD_ALL
-unset OMPI_CC
-unset OMPI_FC
-unset OMPI_F77
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
