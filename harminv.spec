@@ -1,5 +1,5 @@
 %define name	harminv
-%define dist	rocks
+%define dist	rocks6
 %define release	1
 %define version 1.3.1
 
@@ -13,11 +13,11 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		/share/apps
 Requires:	atlas
 Requires:	guile
-Requires:	hdf5 
-BuildRequires:	atlas
-BuildRequires:	hdf5
+Requires:	hdf5
+BuildRequires:	atlas-devel
+BuildRequires:	hdf5-devel
 BuildRequires:	guile-devel
-Summary:	Harminv 1.3.1
+Summary:	Harminv %{version}
 
 %description
 Harminv for a Rocks Cluster.  Not intended for redistribution.
