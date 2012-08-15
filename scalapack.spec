@@ -1,7 +1,7 @@
 %define name	scalapack
 %define dist	rocks
 %define release	1
-%define version 2.0.1
+%define version 2.0.2
 %define prefix	/share/apps
 %define inst	%{name}-%{version}
 
@@ -15,7 +15,7 @@ Prefix:		%{prefix}
 Source:		%{inst}.tgz
 Source1:	SLmake.rocks
 Requires:	atlas
-BuildRequires:	atlas
+BuildRequires:	atlas-devel
 Summary:	ScaLAPACK
 
 %description

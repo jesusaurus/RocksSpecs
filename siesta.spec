@@ -12,7 +12,7 @@ Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-Source:		siesta-%{version}.tgz
+Source:		http://icmab.cat/leem/siesta/CodeAccess/Code/siesta-%{version}.tgz
 Requires:	scalapack
 BuildRequires:	scalapack
 Summary:	Siesta
