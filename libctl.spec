@@ -1,7 +1,7 @@
 %define name	libctl
 %define dist	rocks
 %define release	1
-%define version 3.1
+%define version 3.2.1
 
 Name:		%{name}
 Version:	%{version}
@@ -15,9 +15,9 @@ Requires:	atlas
 Requires:	guile
 Requires:	hdf5 
 Requires:	harminv
-BuildRequires:	atlas
+BuildRequires:	atlas-devel
 BuildRequires:	guile-devel
-BuildRequires:	hdf5
+BuildRequires:	hdf5-devel
 BuildRequires:	harminv
 Summary:	libCtl 3.1
 
@@ -29,13 +29,11 @@ libCtl for a Rocks Cluster.  Not intended for redistribution.
 
 
 %build
-cd ../%{name}-%{version}
 F77=mpif77 LDFLAGS="-L/share/apps/lib" CPPFLAGS="-I/share/apps/include" ./configure --prefix=/share/apps 
 make
 
 
 %install
-cd $RPM_BUILD_DIR/%{name}-%{version}
 rm -rf $RPM_BUILD_ROOT/
 mkdir -p $RPM_BUILD_ROOT/
 DESTDIR=$RPM_BUILD_ROOT make install
@@ -44,6 +42,7 @@ DESTDIR=$RPM_BUILD_ROOT make install
 %clean
 cd $RPM_BUILD_DIR
 rm -rf %{name}-%version}
+rm -rf $RPM_BUILD_ROOT/
 
 
 %files

@@ -1,7 +1,7 @@
 %define name	meep
 %define dist	rocks
 %define release	4
-%define version 1.1.1
+%define version 1.2
 
 Name:		%{name}
 Version:	%{version}
@@ -9,36 +9,35 @@ Release:	%{dist}.%{release}
 Group:		Rocks
 License:	BSD
 Source0:	%{name}-%{version}.tar.gz
-Source1:	libctl-3.1.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Prefix:		/share/apps
 Requires:	atlas
 Requires:	guile
-Requires:	hdf5 
+Requires:	hdf5
 Requires:	harminv
-Requires:	libctl
-Requires:	fftw3
+Requires:	fftw
 Requires:	gsl
-BuildRequires:	atlas
+Requires:	libctl
+BuildRequires:	atlas-devel
 BuildRequires:	guile-devel
-BuildRequires:	hdf5
+BuildRequires:	hdf5-devel
+BuildRequires:	h5utils-devel
 BuildRequires:	harminv
-BuildRequires:	libctl
-BuildRequires:	fftw3-devel
+BuildRequires:	fftw-devel
 BuildRequires:	gsl-devel
-Summary:	Meep 1.1.1 with Harminv 1.3.1 and libCtl 3.1
+BuildRequires:	libctl
+Summary:	Meep %{version} with libctl %{cversion}
 
 %description
 Meep for a Rocks Cluster.  Not intended for redistribution.
 
 %prep
 %setup
-%setup -n libctl-3.1 -T -b 1
 
 
 %build
-cd ../meep-1.1.1
-F77=mpif77 CC=mpicc CXX=mpiCC MPICXX=mpiCC MPILIBS="-lmpi" LDFLAGS="-L/share/apps/lib -L/opt/openmpi/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include -I/opt/openmpi/include -DH5_USE_16_API=1 $CPPFLAGS" ./configure --with-libctl=$RPM_BUILD_DIR/libctl-3.1 --with-mpi --prefix=/share/apps
+cd ../meep-%{version}
+F77=mpif77 CC=mpicc CXX=mpiCC MPICXX=mpiCC MPILIBS="-lmpi" LDFLAGS="-L/share/apps/lib -L/opt/openmpi/lib $LDFLAGS" CPPFLAGS="-I/share/apps/include -I/opt/openmpi/include -DH5_USE_16_API=1 $CPPFLAGS" ./configure --with-mpi --with-libctl=/share/apps/share/libctl --prefix=/share/apps
 make
 
 
