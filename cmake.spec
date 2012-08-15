@@ -2,13 +2,12 @@
 %define name	cmake
 %define dist	rocks
 %define release	1
-%define version 2.8.6
+%define version 2.8.9
 
 Name:           %{name}
 Version:        %{version}
 Release:        %{dist}.%{release}
-Summary:        CMake 2.8.6
-
+Summary:        CMake %{version}
 Group:          Rocks
 License:        BSD
 URL:            http://www.cmake.org/
