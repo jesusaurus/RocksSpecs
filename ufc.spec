@@ -1,4 +1,4 @@
-%define name	UFC
+%define name	ufc
 %define dist	rocks
 %define release	1
 %define version 2.0.5
@@ -15,8 +15,6 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
 BuildRequires:	cmake
 BuildRequires:	swig
-BuildRequires:	python26-devel
-BuildRequires:	swig
 Requires:	swig
 Summary:	UFC
 
@@ -27,11 +25,11 @@ UFC for a Rocks Cluster.  Not intedended for distribution.
 %setup -n ufc-2.0.5
 
 %build
-cmake -DCMAKE_PREFIX_PATH=/share/apps -DCMAKE_INSTALL_PREFIX=$RPM_BUILD_ROOT%{prefix} -DPYTHON_EXECUTABLE:FILEPATH=/usr/bin/python26 -DPYTHON_INCLUDE_PATH:PATH=/usr/include/python2.6/ -DPYTHON_LIBRARY:FILEPATH=/usr/lib64/libpython2.6.so.1.0 .
+cmake -DCMAKE_PREFIX_PATH=/share/apps -DCMAKE_INSTALL_PREFIX=%{prefix} .
 make
 
 %install
-make install
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 

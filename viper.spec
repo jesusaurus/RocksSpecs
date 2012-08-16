@@ -1,4 +1,4 @@
-%define name	Viper
+%define name	viper
 %define dist	rocks
 %define release	1
 %define version 1.0.0
@@ -13,8 +13,8 @@ URL:		https://launchpad.net/fenics-viper
 Source:		http://launchpad.net/fenics-viper/1.0.x/1.0.0/+download/viper-1.0.0.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-BuildRequires:	python26
-Requires:	python26
+BuildRequires:	python
+Requires:	python
 Summary:	Viper
 
 %description
@@ -24,10 +24,11 @@ Viper for a Rocks Cluster.  Not intedended for distribution.
 %setup -n viper-1.0.0
 
 %build
+python setup.py build
 
 
 %install
-python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
+python setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %clean
 

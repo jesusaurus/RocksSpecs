@@ -12,6 +12,7 @@ set(CMAKE_LIBRARY_PATH ${BLAS_DIR}/lib $ENV{BLAS_DIR}/lib ${CMAKE_LIBRARY_PATH})
 find_package(AMD)
 find_package(BLAS)
 find_package(CHOLMOD)
+find_package(SuiteSparse)
 
 # Check for header file
 find_path(UMFPACK_INCLUDE_DIRS umfpack.h
@@ -37,6 +38,9 @@ if (BLAS_FOUND)
 endif()
 if (CHOLMOD_FOUND)
   set(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${CHOLMOD_LIBRARIES})
+endif()
+if (SuiteSparse_FOUND)
+  set(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${SuiteSparse_LIBRARIES})
 endif()
 
 find_program(GFORTRAN_EXECUTABLE gfortran)

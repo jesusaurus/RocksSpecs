@@ -1,7 +1,7 @@
 %define name	armadillo
 %define dist	rocks
 %define release	1
-%define version 2.4.4
+%define version 3.2.4
 %define prefix	/share/apps
 
 Name:		%{name}
@@ -26,12 +26,13 @@ Armadillo for a Rocks Cluster.  Not intedended for distribution.
 %setup 
 
 %build
-cmake -DCMAKE_PREFIX_PATH=/share/apps -DBLAS_LIBRARY=/share/apps/lib/libatlas.a -DCMAKE_INSTALL_PREFIX=$RPM_BUILD_ROOT%{prefix} .
+cmake -DCMAKE_PREFIX_PATH=/share/apps -DBLAS_LIBRARY=/share/apps/lib/libatlas.a -DCMAKE_INSTALL_PREFIX=%{prefix} .
 make
 
 
 %install
-make install
+make install DESTDIR=$RPM_BUILD_ROOT
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -40,12 +41,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 /share/apps/include/armadillo
 /share/apps/include/armadillo_bits
-/share/apps/include/armadillo_itpp
-/share/apps/lib/libarmadillo.so
-/share/apps/lib/libarmadillo.so.2
-/share/apps/lib/libarmadillo.so.%{version}
-/share/apps/share/Armadillo/CMake/ArmadilloConfig.cmake
-/share/apps/share/Armadillo/CMake/ArmadilloConfigVersion.cmake
-/share/apps/share/Armadillo/CMake/ArmadilloLibraryDepends-noconfig.cmake
-/share/apps/share/Armadillo/CMake/ArmadilloLibraryDepends.cmake
+/share/apps/lib64/libarmadillo.so
+/share/apps/lib64/libarmadillo.so.3
+/share/apps/lib64/libarmadillo.so.%{version}
+/share/apps/share/Armadillo/
 

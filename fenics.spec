@@ -10,13 +10,13 @@ Group:		Rocks
 License:	unknown
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		/share/apps
-Requires:	FFC
-Requires:	FIAT
-Requires:	Instant
-Requires:	Viper
-Requires:	UFL
-Requires:	Dolfin
-Requires:	UFC
+Requires:	ffc
+Requires:	fiat
+Requires:	instant
+Requires:	viper
+Requires:	ufl
+Requires:	dolfin
+Requires:	ufc
 Summary:	Fenics Project Meta-Package
 
 %description

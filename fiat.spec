@@ -1,4 +1,4 @@
-%define name	FIAT
+%define name	fiat
 %define dist	rocks
 %define release	1
 %define version 1.0.0
@@ -13,21 +13,21 @@ URL:		https://launchpad.net/fiat
 Source:		http://launchpad.net/fiat/1.0.x/1.0.0/+download/fiat-1.0.0.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Prefix:		%{prefix}
-BuildRequires:	python26
-Requires:	python26
+BuildRequires:	python
+Requires:	python
 Summary:	FIAT
 
 %description
 FIAT for a Rocks Cluster.  Not intedended for distribution.
 
 %prep
-%setup -n fiat-1.0.0
+%setup
 
 %build
-
+python setup.py build
 
 %install
-python26 setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
+python setup.py install --prefix=$RPM_BUILD_ROOT%{prefix}
 
 %clean
 
